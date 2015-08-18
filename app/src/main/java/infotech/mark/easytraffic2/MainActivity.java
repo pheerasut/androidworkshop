@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,8 +15,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createListview();
     }
-    public void click_test(View view){
+
+    private void createListview() {
+        MyData objMydata = new MyData();
+        int[] intIcon = objMydata.icon();
+        String[] strTitle = objMydata.title();
+        MyAdapter objMyadapter = new MyAdapter(MainActivity.this,intIcon,strTitle);
+        ListView myListView=(ListView)findViewById(R.id.listView);
+        myListView.setAdapter(objMyadapter);
+
+
+    }
+
+    public void click_test(View view) {
         Intent objIntent = new Intent(Intent.ACTION_VIEW);
         objIntent.setData(Uri.parse("http://pheerasut.bugs3.com"));
         startActivity(objIntent);
